@@ -10,11 +10,18 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     private final UserDao userDao;
 
     @Autowired
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
+    }
+
+    @Override
+    @Transactional
+    public void addUser(User user) {
+        userDao.addUser(user);
     }
 
     @Override
@@ -24,29 +31,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void save(User user) {
-        userDao.save(user);
-    }
-
-    @Override
-    public User show(int id) {
-        return userDao.show(id);
+    public void updateUser(User user) {
+        userDao.updateUser(user);
     }
 
     @Override
     @Transactional
-    public void update(int id, User updateUser) {
-        userDao.update(id, updateUser);
+    public void deleteUser(int id) {
+        userDao.deleteUser(id);
     }
 
     @Override
-    @Transactional
-    public void delete(int id) {
-        userDao.delete(id);
-    }
-
-    @Override
-    public User isExistById(User user) {
-        return userDao.isExistById(user);
+    public User getUserById(int id) {
+        return userDao.getUserById(id);
     }
 }

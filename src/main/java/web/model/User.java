@@ -9,21 +9,26 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
     @Column(name = "name")
     private String name;
-    @Column(name = "surname")
-    private String surname;
-    @Column(name = "age")
-    private Byte age;
 
-    public User() {
+    @Column(name = "car")
+    private String car;
 
+    public User() { }
+
+    public User(String name, String car) {
+        this.name = name;
+        this.car = car;
     }
 
-    public User(String name, String surname, Byte age) {
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -34,26 +39,11 @@ public class User {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getCar() {
+        return car;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public Byte getAge() {
-        return age;
-    }
-
-    public void setAge(Byte age) {
-        this.age = age;
-    }
-
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
+    public void setCar(String car) {
+        this.car = car;
     }
 }
