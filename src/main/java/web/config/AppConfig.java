@@ -1,5 +1,7 @@
 package web.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,8 +13,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.core.env.Environment;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -21,7 +21,6 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan(value = "web")
 public class AppConfig {
-
     private final Environment env;
 
     public AppConfig(Environment env){
@@ -38,10 +37,6 @@ public class AppConfig {
         return dataSource;
     }
 
-    @Bean
-    public EntityManager entityManager(EntityManagerFactory entityManagerFactory) {
-        return entityManagerFactory.createEntityManager();
-    }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean getEntityManager() {

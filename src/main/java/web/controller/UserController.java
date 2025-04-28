@@ -2,7 +2,6 @@ package web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
@@ -37,11 +36,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public String saveUser(@RequestParam("name") String name,
-                           @RequestParam("car") String car) {
-        User user = new User();
-        user.setName(name);
-        user.setCar(car);
+    public String saveUser(@ModelAttribute("user") User user) {
         userService.addUser(user);
         return "redirect:/users";
     }
@@ -49,19 +44,12 @@ public class UserController {
     @GetMapping("/edit")
     public String editUserForm(@RequestParam("id") int id, ModelMap model) {
         model.addAttribute("user", userService.getUserById(id));
-        return "edit"; // Страница для редактирования
+        return "edit";
     }
 
     @PostMapping("/update")
-    public String updateUser(@RequestParam("id") int id,
-                             @RequestParam("name") String name,
-                             @RequestParam("car") String car) {
-        User user = userService.getUserById(id);
-        if (user != null) {
-            user.setName(name);
-            user.setCar(car);
-            userService.updateUser(user);
-        }
+    public String updateUser(@ModelAttribute("user") User user) {
+        userService.updateUser(user);
         return "redirect:/users";
     }
 
